@@ -1,3 +1,4 @@
+
 def main():
     nimi = input("Palun sisestage oma täisnimi: ")
     ettevote = input("Sisestage ettevõtte nimi: ")
