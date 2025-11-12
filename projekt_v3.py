@@ -1,22 +1,32 @@
+"""
+*Senine koostöö on sujunud meil hästi. Kindlaid rolle meil pole. Tuleb mõni hea idee, mida teha siis pakub välja. Oleneb kummal antud hetkel rohkem aega on, see tegeleb.
+*Projektile on kulun hetkeseisuga ligikaudu 10 tundi. Põhiliselt planeerimise ja erinevate vahendite ning teekide uurimisele, mida võiks projekti jaoks kasutada.
+*Plaanime menüüd täiendada, lisada kujunduse, luua võimaluse valida eesti ja inglise keele vahel, mõte lisada võimalus lihtsalt sisestada link kuulutusele ning programm
+võtab sealt automaatselt nõuded, et teha protsess kiiremaks. Saad salvestada oma andmeid, et ei peaks neid iga kord sisestama.
+"""
+
+
+
+
 import tkinter as tk
 from tkinter import Menubutton, Menu, messagebox, ttk
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 
-# --- PÕHIAKEN ---
+"""Põhiaken"""
 root = tk.Tk()
 root.title("Kandideerimismasin")
 root.geometry("400x200")
 
 
-# --- FUNKTSIOON: Loo kaaskirja aken ---
+"""FUNKTSIOON: Loo kaaskirja aken"""
 def kaaskiri_vorm():
     """Avab eraldi akna (Toplevel), kus saab kaaskirja väljad täita."""
     win = tk.Toplevel(root)
     win.title("Kaaskiri")
     win.geometry("700x600")
 
-    # väljade nimed ja võtmed
+    """väljade nimed ja võtmed"""
     fields = [
         ("Täisnimi", "nimi", "entry"),
         ("Ettevõte", "ettevote", "entry"),
@@ -48,7 +58,7 @@ def kaaskiri_vorm():
             scrollbar.config(command=t.yview)
             entries[key] = t
 
-    # --- FUNKTSIOON: Kaaskirja koostamine ---
+    """FUNKTSIOON: Kaaskirja koostamine"""
     def koosta_kiri():
         # loe väärtused
         def get_value(key):
@@ -95,7 +105,7 @@ sobiv inimene.
 Lugupidamisega,
 {nimi}"""
 
-        # --- Kuvame kirja uues aknas ---
+        """Kuvame kirja uues aknas"""
         win_kiri = tk.Toplevel(win)
         win_kiri.title("Valmis kaaskiri")
         win_kiri.geometry("700x600")
@@ -104,7 +114,7 @@ Lugupidamisega,
         text.insert("1.0", kiri)
         text.pack(padx=10, pady=10, fill="both", expand=True)
 
-        # --- TXT ja PDF salvestus ---
+        """TXT ja PDF salvestus"""
         def salvesta_txt():
             with open("kaaskiri.txt", "w", encoding="utf-8") as f:
                 f.write(kiri)
@@ -123,21 +133,22 @@ Lugupidamisega,
         ttk.Button(win_kiri, text="💾 Salvesta TXT", command=salvesta_txt).pack(pady=5)
         ttk.Button(win_kiri, text="📄 Salvesta PDF", command=salvesta_pdf).pack(pady=5)
 
-    # --- Nupp kirja koostamiseks ---
+    """Nupp kirja koostamiseks"""
     ttk.Button(win, text="Koosta kiri", command=koosta_kiri).grid(
         row=len(fields), column=0, columnspan=2, pady=15
     )
 
-    # võrgu laiendused
+    """võrgu laiendused"""
     win.grid_columnconfigure(1, weight=1)
 
 
-# --- MENUBUTTON + MENU ---
+"""MENUBUTTON + MENU"""
 mb = Menubutton(root, text="Vali tegevus", relief="raised", width=20)
 mb.grid(row=0, column=0, padx=20, pady=50)
 
 menu = Menu(mb, tearoff=0)
 mb.config(menu=menu)
 menu.add_command(label="Loo kaaskiri", command=kaaskiri_vorm)
+
 
 root.mainloop()
