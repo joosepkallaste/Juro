@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import Menubutton, Menu, messagebox
 
 # --- PÕHIAKEN ---
-root = tk.Tk()                     # <— mitte tk.TK()
+root = tk.Tk()                     
 root.title("Kandideerimismasin")
 
 
@@ -47,7 +47,7 @@ def kaaskiri_vorm():
         gmail              = entries["gmail"].get().strip()
         tel                = entries["tel"].get().strip()
 
-        # 2) väga lihtne kontroll (soovi korral)
+        # 2) väga lihtne kontroll 
         if not (nimi and ettevote and esindajaAmetikoht and esindajaNimi and
                 ametikoht and noudedKandidaadile and miksMina and gmail and tel):
             messagebox.showerror("Viga", "Palun täida kõik väljad.")
