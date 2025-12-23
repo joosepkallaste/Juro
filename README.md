@@ -1,2 +1,0 @@
-# Juro
-Proge projekt
